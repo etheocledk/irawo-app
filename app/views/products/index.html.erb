@@ -1,1 +1,68 @@
-<% content_for :title, "Acceuil" %>
+<% content_for :title, "Accueil" %>
+<section class="relative overflow-hidden py-[70px] bg-gray-100">
+
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+        <h4 class="text-4xl font-bold mb-5">
+            Explorez nos ressources
+        </h4>
+        <p class="text-lg mb-10">Trouvez des ressources adaptées à vos besoins en filtrant par catégorie, prix et mot-clé.</p>
+
+        <div class="relative w-full max-w-5xl bg-white p-6 rounded-lg">
+            <form action="/recherche" method="GET" class="flex space-x-4 items-center">
+                <div class="relative flex-1">
+                    <input type="text" name="search" class="w-full pl-10 pr-4 py-2 text-black rounded-full border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rechercher une ressource..." aria-label="Search">
+                    <div class="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
+                        <i class="tf-icons ri-search-line"></i>
+                    </div>
+                </div>
+
+                <div class="relative w-48">
+                    <select name="category" id="category" class="w-full pl-3 pr-4 py-2 text-black rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Toutes les catégories</option>
+                        <option value="livres">Livres</option>
+                        <option value="documents">Documents</option>
+                        <option value="cours">Cours</option>
+                        <option value="logiciels">Logiciels</option>
+                    </select>
+                </div>
+
+                <div class="relative w-48">
+                    <select name="price" id="price" class="w-full pl-3 pr-4 py-2 text-black rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Tous les prix</option>
+                        <option value="low">Moins de 20€</option>
+                        <option value="mid">Entre 20€ et 100€</option>
+                        <option value="high">Plus de 100€</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-36 py-2 px-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Rechercher
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="py-10 bg-white px-[60px]">
+    <h2 class="text-3xl font-bold text-center mb-8">Nos ressources</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden p-2">
+            <img src="{{ asset('assets/images/affiche.jpeg') }}" class="w-full h-48 object-cover rounded-lg" alt="Produit 5">
+            <div class="p-4">
+                <h3 class="text-xl font-semibold text-gray-800">Nom du Produit 3</h3>
+                <p class="text-gray-600 text-sm mt-2 line-clamp-3">Description courte du produit. Découvrez ses
+                    caractéristiques et ses avantages.</p>
+
+                <div class="flex items-center mt-4">
+                    <span class="text-lg font-bold text-gray-900 mr-2">$49.99</span>
+                </div>
+
+                <div class="flex justify-between items-center mt-4">
+                    <a href="#" class="px-4 py-2 text-white bg-[#003169] hover:bg-[#005278] rounded-md text-sm font-medium">Acheter</a>
+                    <a href="/product/3" class="text-[#003169] hover:text-[#005278] text-sm font-medium hover:underline">Détails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
