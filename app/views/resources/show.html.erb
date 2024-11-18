@@ -1,0 +1,31 @@
+<% content_for :title, "Detail" %>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row gap-8">
+        <div class="w-full md:w-2/3 h-[400px]">
+            <img src="<%= @resource.image %>" alt="Nom du produit"
+                class="w-full h-full object-cover rounded-lg">
+        </div>
+
+
+        <div class="w-full md:w-1/2">
+            <h1 class="text-3xl font-semibold text-gray-800 mb-4"><%= @resource.name %> (<%= @resource.category.name %>)</h1>
+
+            <div class="flex items-center mb-4">
+                <span class="text-2xl font-bold text-gray-900 mr-4"><%= number_to_currency(@resource.price) %></span>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                <%= @resource.description %>
+            </p>
+
+            <div class="flex gap-4 mt-10">
+                <button class="px-6 py-2 bg-[#003169] text-white rounded-md hover:bg-[#005278] font-medium">
+                    Ajouter au panier
+                </button>
+                <a href="/boutique" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 font-medium">
+                    Retour à la boutique
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
