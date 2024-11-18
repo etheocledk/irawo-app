@@ -10,42 +10,43 @@
         <p class="text-lg mb-10">Trouvez des ressources adaptées à vos besoins en filtrant par catégorie, prix et mot-clé.</p>
 
         <div class="relative w-full max-w-5xl bg-white p-6 rounded-lg">
-            <form action="/recherche" method="GET" class="flex space-x-4 items-center">
-                <div class="relative flex-1">
-                    <input type="text" name="search" class="w-full pl-10 pr-4 py-2 text-black rounded-full border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rechercher une ressource..." aria-label="Search">
-                    <div class="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
-                        <i class="tf-icons ri-search-line"></i>
-                    </div>
+            <%= form_tag(resources_path, method: :get, class: "flex space-x-4 items-center") do %>
+            <div class="relative flex-1">
+                <input type="text" name="search" class="w-full pl-10 pr-4 py-2 text-black rounded-full border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rechercher une ressource..." value="<%= params[:search] %>" aria-label="Search">
+                <div class="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
+                    <i class="tf-icons ri-search-line text-black"></i>
                 </div>
+            </div>
 
-                <div class="relative w-48">
-                    <select name="category" id="category" class="w-full pl-3 pr-4 py-2 text-black rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">Toutes les catégories</option>
-                        <option value="livres">Livres</option>
-                        <option value="documents">Documents</option>
-                        <option value="cours">Cours</option>
-                        <option value="logiciels">Logiciels</option>
-                    </select>
-                </div>
+            <div class="relative w-48">
+                <select name="category" id="category" class="w-full pl-3 pr-4 py-2 text-black rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Toutes les catégories</option>
+                    <% @categories.each do |category| %>
+                    <option value="<%= category.name %>" <%= "selected" if params[:category] == category.name %>><%= category.name %></option>
+                    <% end %>
+                </select>
+            </div>
 
-                <div class="relative w-48">
-                    <select name="price" id="price" class="w-full pl-3 pr-4 py-2 text-black rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">Tous les prix</option>
-                        <option value="low">Moins de 20€</option>
-                        <option value="mid">Entre 20€ et 100€</option>
-                        <option value="high">Plus de 100€</option>
-                    </select>
-                </div>
+            <div class="relative w-48">
+                <select name="price" id="price" class="w-full pl-3 pr-4 py-2 text-black rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Tous les prix</option>
+                    <option value="low" <%= "selected" if params[:price] == "low" %>>Moins de 20$</option>
+                    <option value="mid" <%= "selected" if params[:price] == "mid" %>>Entre 20$ et 60$</option>
+                    <option value="high" <%= "selected" if params[:price] == "high" %>>Plus de 100$</option>
+                </select>
+            </div>
 
-                <button type="submit" class="w-36 py-2 px-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Rechercher
-                </button>
-            </form>
+            <button type="submit" class="w-36 py-2 px-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Rechercher
+            </button>
+            <% end %>
+
         </div>
     </div>
 </section>
 <section class="py-10 bg-white px-[60px]">
     <h2 class="text-3xl font-bold text-center mb-8">Nos ressources</h2>
+    <% if @resources.any? %>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <% @resources.each do |resource| %>
         <div class="bg-white border border-gray-200 rounded-lg overflow-hidden p-2">
@@ -66,4 +67,10 @@
         </div>
         <% end %>
     </div>
+    <% else %>
+    <div class="no-resources-message">
+        <p class="text-3xl text-center my-24">Aucune ressource disponible</p>
+    </div>
+    <% end %>
+    <%= paginate @resources %>
 </section>
