@@ -5,68 +5,47 @@
     </div>
 
     <div class="mt-10">
+        <% if @purchased_resources.any? %>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nom d'utilisateur</th>
-                    <th>Email</th>
-                    <th>Rôle</th>
+                    <th>Nom de la ressource</th>
+                    <th>Prix</th>
+                    <th>Date d'achat</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                <% @purchased_resources.each do |purchase| %>
                 <tr>
-                    <td>1</td>
-                    <td>john_doe</td>
-                    <td>john.doe@example.com</td>
-                    <td>Administrateur</td>
+                    <td><%= purchase.id %></td>
+                    <td><%= purchase.resource.name %></td>
+                    <td><%= number_to_currency(purchase.price_paid) %></td>
+                    <td><%= purchase.purchased_at.strftime('%d/%m/%Y %H:%M') %></td>
                     <td>
-                        <button class="edit-btn">Modifier</button>
-                        <button class="delete-btn">Supprimer</button>
+                        <% if purchase.resource.link_url.present? && purchase.resource.resource_type == "t" %>
+                        <%= link_to "Accéder à la ressource", purchase.resource.link_url, 
+                    target: "_blank", 
+                    class: "px-4 py-2 text-white bg-[#003169] hover:bg-[#005278] rounded-md text-sm font-medium" %>
+                        <% elsif purchase.resource.resource_type == "f" %>
+                        <%= link_to "Télécharger le fichier", purchase.resource.link_url, 
+                    class: "px-4 py-2 text-white bg-[#4C4C4C] hover:bg-[#6E6E6E] rounded-md text-sm font-medium", 
+                    download: true %>
+                        <% else %>
+                        <span>Aucune action disponible</span>
+                        <% end %>
                     </td>
+
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>jane_smith</td>
-                    <td>jane.smith@example.com</td>
-                    <td>Utilisateur</td>
-                    <td>
-                        <button class="edit-btn">Modifier</button>
-                        <button class="delete-btn">Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>alice_jones</td>
-                    <td>alice.jones@example.com</td>
-                    <td>Modérateur</td>
-                    <td>
-                        <button class="edit-btn">Modifier</button>
-                        <button class="delete-btn">Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>bob_brown</td>
-                    <td>bob.brown@example.com</td>
-                    <td>Utilisateur</td>
-                    <td>
-                        <button class="edit-btn">Modifier</button>
-                        <button class="delete-btn">Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>charlie_white</td>
-                    <td>charlie.white@example.com</td>
-                    <td>Administrateur</td>
-                    <td>
-                        <button class="edit-btn">Modifier</button>
-                        <button class="delete-btn">Supprimer</button>
-                    </td>
-                </tr>
+                <% end %>
             </tbody>
         </table>
+        <% else %>
+        <p>Aucun achat effectué.</p>
+        <% end %>
     </div>
+
+</div>
+
 </div>

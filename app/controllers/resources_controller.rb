@@ -1,8 +1,6 @@
 class ResourcesController < ApplicationController
+  before_action :set_resource, only: [:show, :purchase]
 
-    def show
-      @resource = Resource.find(params[:id])
-    end
 
     def index
       @categories = Category.all 
@@ -29,5 +27,29 @@ class ResourcesController < ApplicationController
       else
         @resources = Resource.all.page(params[:page]).per(10)
       end
+    end
+
+    def show
+      @resource = Resource.find(params[:id])
+    end
+
+    def purchase
+      purchased_resource = PurchasedResource.new(
+        resource: @resource,
+        price_paid: @resource.price,
+        purchased_at: Time.current
+      )
+  
+      if purchased_resource.save
+        redirect_to resources_path, notice: "Votre achat a été effectué avec succès !"
+      else
+        redirect_to resources_path, alert: "Une erreur est survenue lors de l'achat."
+      end
+    end
+  
+    private
+  
+    def set_resource
+      @resource = Resource.find(params[:id])
     end
 end

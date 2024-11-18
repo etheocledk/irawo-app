@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get "carts/show"
-  get "purchases/index", to: "purchases#index", as: :mon_espace
-
-  resources :resources
+  resources :purchases, only: [:index]
+  # get "purchases/index", to: "purchases#index", as: :mon_espace
+  resources :resources do
+    post 'purchase', on: :member 
+  end  
 
   root "resources#index"
 end
