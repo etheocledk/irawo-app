@@ -1,24 +1,43 @@
-# README
+# Nom du projet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Une brève description de ce que fait ton application. Par exemple, une application de gestion de ressources ou un projet de blog.
 
-Things you may want to cover:
+## Prérequis
 
-* Ruby version
+Avant de commencer à utiliser ce projet, assurez-vous que vous avez les éléments suivants installés sur votre machine :
 
-* System dependencies
+- **Ruby** 
+- **Rails** 
+- **SQLite3** 
+- **Git** 
 
-* Configuration
+## Étapes pour exécuter le projet en local
 
-* Database creation
+### 1. Cloner le projet depuis GitHub
 
-* Database initialization
+Tout d'abord, vous devez cloner le projet sur votre machine locale.
 
-* How to run the test suite
+1. Ouvrez un terminal.
+2. Clonez ce projet en utilisant Git :
 
-* Services (job queues, cache servers, search engines, etc.)
+   ```bash
+   git clone https://github.com/etheocledk/irawo-app.git
+   cd irawo-app
+   
+3. Installer les dépendances :
 
-* Deployment instructions
+   ```bash
+   bundle install
 
-* ...
+4. Configurer la base de données :
+
+   ```bash
+   rails db:create
+   rails db:migrate
+   rails db:seed
+
+5. Lancer le serveur local :
+
+   ```bash
+   rails server
+
