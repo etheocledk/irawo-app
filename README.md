@@ -1,6 +1,6 @@
-# Nom du projet
+# MINI-IRAWO
 
-Une brève description de ce que fait ton application. Par exemple, une application de gestion de ressources ou un projet de blog.
+C'est une mini application de gestion de ressources.
 
 ## Prérequis
 
